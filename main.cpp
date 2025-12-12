@@ -1,8 +1,10 @@
 #include <iostream>
 #include <string>
-using namespace std;
 #include <cstdlib>
 #include <ctime>
+#include <deque>
+using namespace std;
+
 
 
 // Milestone 1 :
@@ -38,20 +40,18 @@ void printCoffeeQueue() {
     while (temp != NULL) {
         cout << "[" << temp->name << " --> " << temp->order << "] ";
         temp = temp->next;
-    }    
+    } 
+    cout << endl;
 }
 
 // Muffin Queue
 void printMuffinQueue(const deque<string>& dq) {
     cout << "Mufffin Booth Queue: ";
-    while (temp != NULL) {
     for (int i = 0; i < dq.size(); i++) {
         cout << "[" << dq[i] << "] "; 
     }
     cout << endl;
 }
-
-
 
 
 int main() {
@@ -61,17 +61,23 @@ int main() {
     string drinks[] = {"Latte", "Mocha", "Matcha", "Cold Brew", "Cappuccino"};
     string muffins[] = {"Blueberry Muffin", "Chocolate Muffin", "Banana Muffin", "Lemon Poppy Seed Muffin"};
 
-    // Queue with 3 random customers
+    // Initial Coffee Queue with (3 random customers)
     for (int i = 0; i < 3; i++) {
-        string customerName = names[rand() % 5];
-        string customerOrder = drinks[rand() % 5];
-        enqueue(customerName, customerOrder);
+        enqueue(names[rand() % 5], drinks[rand() % 5]);
     }
-        cout << "Begining the Coffee Booth Simulation (10 Rounds)\n\n";
+    
+    // Initial Muffin Queue with (3 random customers)
+    deque<string> muffinQueue;
+    for (int i = 0; i < 3; i++) {
+        muffinQueue.push_back(names[rand() % 5] + string(" --> ") + muffins[rand() % 4]);
+    }
+
+    cout << "Beginning the Coffee + Muffin Booth Simulation (10 Rounds)\n\n";
         
-        // 10 round sim
-        for(int round = 1; round <= 10; round++) {
-            cout << "---- Round " << round << " ----\n";
+    // 10 round simulation
+    for(int round = 1; round <= 10; round++) {
+        cout << "---- Round " << round << " ----\n";
+    
         
 // *** COFFEE BOOTH ***
         // Served customer at the head spot
@@ -87,8 +93,7 @@ int main() {
             }
         } else {
             cout << "No customers (Empty Queue).\n";
-        }
-    
+    }
         // 50% chance someone joins line
         if (rand() % 2 == 0) {
             string customerName = names[rand() % 5];
@@ -99,12 +104,22 @@ int main() {
 
 // *** MUFFIN BOOTH ***
         if (!muffinQueue.empty()) {
-
+            cout << "Muffin Served: " << muffinQueue.front() << endl;
+            muffinQueue.pop_front();
+        } else {
+            cout << "No customers at Muffin Booth.\n";
+    }
+        // 50% chance
+        if (rand() % 2 == 0) {
+            string customerName = names[rand() % 5];
+            string customerOrder = muffins[rand() % 4];
+            muffinQueue.push_back(customerName + string(" --> ") + customerOrder);
+            cout << "Muffin new arrival: " << customerName << " --> " << customerOrder << endl;
         }
 
-
-
-        printQueue();
+        printCoffeeQueue();
+        printMuffinQueue(muffinQueue);
+        
         cout << endl;
     }
 
