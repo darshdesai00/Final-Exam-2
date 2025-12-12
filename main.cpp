@@ -6,14 +6,12 @@ using namespace std;
 
 
 // Milestone 1 :
-
 // Node Struct
 struct Node {
     string name;
     string order;
     Node * next;
 };
-
 // Front and Back
 Node * head = NULL;
 Node * tail = NULL;
@@ -60,7 +58,7 @@ int main() {
         
         // Loop
         for(int round = 1; round <= 10; round++) {
-            cout << " ---- Round" << round << " ----\n";
+            cout << "---- Round" << round << " ----\n";
         
             // Served customer at the head spot
         if (head != NULL) {
@@ -71,16 +69,23 @@ int main() {
             delete temp;
 
             if (head == NULL){
-                
+                tail = NULL;
             }
+        } else {
+            cout << " No customers (Empty Queue).\n";
+        }
     
-
+        // 50% chance someone joins line
+        if (rand() % 2 == 0) {
+            string customerName = names[rand() % 5];
+            string customerOrder = drinks[rand() % 5];
+            enqueue(customerName , customerOrder);
+            cout << "New arrival: " << customerName << " --> " << customerOrder << endl;
         }
 
-        }
-
-
-
+        printQueue();
+        cout << endl;
+    }
 
     return 0;
 }
