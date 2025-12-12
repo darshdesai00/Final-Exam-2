@@ -58,7 +58,7 @@ int main() {
         
         // Loop
         for(int round = 1; round <= 10; round++) {
-            cout << "---- Round" << round << " ----\n";
+            cout << "---- Round " << round << " ----\n";
         
             // Served customer at the head spot
         if (head != NULL) {
@@ -72,7 +72,7 @@ int main() {
                 tail = NULL;
             }
         } else {
-            cout << " No customers (Empty Queue).\n";
+            cout << "No customers (Empty Queue).\n";
         }
     
         // 50% chance someone joins line
@@ -89,4 +89,6 @@ int main() {
 
     return 0;
 }
+
+
 
