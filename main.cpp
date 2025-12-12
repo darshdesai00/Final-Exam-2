@@ -27,9 +27,7 @@ n->next = NULL;
 
 if (head == NULL) {
     head = tail = n;
-    
-    } else {
-    
+} else {
     tail->next = n;
     tail = n;
     }
@@ -40,7 +38,7 @@ void printQueue() {
     Node * temp = head;
     cout << "Coffee Booth Queue: ";
     while (temp != NULL) {
-        cout << "[" << temp->name << " - " << temp->order << "] ";
+        cout << "[" << temp->name << " --> " << temp->order << "] ";
         temp = temp->next;
     }
     cout << endl;
@@ -58,7 +56,31 @@ int main() {
         string customerOrder = drinks[rand() % 5];
         enqueue(customerName, customerOrder);
     }
-        printQueue();
+        cout << "Begining the Coffee Booth Simulation (10 Rounds)\n\n";
+        
+        // Loop
+        for(int round = 1; round <= 10; round++) {
+            cout << " ---- Round" << round << " ----\n";
+        
+            // Served customer at the head spot
+        if (head != NULL) {
+            cout << "Served: " << head->name << " --> " << head->order << endl;
+
+            Node * temp = head;
+            head = head->next;
+            delete temp;
+
+            if (head == NULL){
+                
+            }
+    
+
+        }
+
+        }
+
+
+
 
     return 0;
 }
