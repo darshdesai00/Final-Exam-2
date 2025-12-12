@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <deque>
+#include <vector>
 using namespace std;
 
 
@@ -44,7 +45,7 @@ void printCoffeeQueue() {
     cout << endl;
 }
 
-// Muffin Queue
+// Muffin Booth (deque)
 void printMuffinQueue(const deque<string>& dq) {
     cout << "Mufffin Booth Queue: ";
     for (int i = 0; i < dq.size(); i++) {
@@ -53,6 +54,15 @@ void printMuffinQueue(const deque<string>& dq) {
     cout << endl;
 }
 
+// Bracelet Booth (Vector)
+void printBraceletQueue(const vector<string>& v) {
+    cout << "Bracelet Booth Queue: ";
+    for (int i = 0; i < v.size(); i++)
+        cout << "[" << v[i] << "] ";
+    cout << endl;
+}
+
+
 
 int main() {
     srand(time(0));
@@ -60,6 +70,7 @@ int main() {
     string names[] = {"Alex", "Jordan", "Riley", "Taylor", "Casey"};
     string drinks[] = {"Latte", "Mocha", "Matcha", "Cold Brew", "Cappuccino"};
     string muffins[] = {"Blueberry Muffin", "Chocolate Muffin", "Banana Muffin", "Lemon Poppy Seed Muffin"};
+    string bracelets[] = {"Beaded Bracelet", "Charm Bracelet", "Friendship Tie", "Woven Bracelet"};
 
     // Initial Coffee Queue with (3 random customers)
     for (int i = 0; i < 3; i++) {
@@ -72,8 +83,13 @@ int main() {
         muffinQueue.push_back(names[rand() % 5] + string(" --> ") + muffins[rand() % 4]);
     }
 
-    cout << "Beginning the Coffee + Muffin Booth Simulation (10 Rounds)\n\n";
-        
+    // Initial Bracelet Queue
+    vector<string>braceletQueue;
+    for(int i = 0; i < 3; i++)
+    braceletQueue.push_back(names[rand() % 5] + " --> " + bracelets[rand() % 4]);
+    
+    cout << "Beginning Multi-Booth Simulation (10 Rounds)\n\n";     
+
     // 10 round simulation
     for(int round = 1; round <= 10; round++) {
         cout << "---- Round " << round << " ----\n";
@@ -82,7 +98,7 @@ int main() {
 // *** COFFEE BOOTH ***
         // Served customer at the head spot
         if (head != NULL) {
-            cout << "Served: " << head->name << " --> " << head->order << endl;
+            cout << "Coffee Served: " << head->name << " --> " << head->order << endl;
 
             Node * temp = head;
             head = head->next;
@@ -117,9 +133,25 @@ int main() {
             cout << "Muffin new arrival: " << customerName << " --> " << customerOrder << endl;
         }
 
+// *** BRACELET BOOTH ***
+        if (!braceletQueue.empty()) {
+            cout << "Bracelet Served: " << braceletQueue.front() << endl;
+            braceletQueue.erase(braceletQueue.begin());
+        } else {
+            cout << "No customers at Bracelet Booth.\n";
+        }
+
+        if (rand() % 2 == 0) {
+            string n = names[rand() % 5];
+            string b = bracelets[rand() % 4];
+            braceletQueue.push_back(n + " --> " + b);
+            cout << "Bracelet new arrival: " << n << " --> " << b << endl;
+        }
+        
         printCoffeeQueue();
         printMuffinQueue(muffinQueue);
-        
+        printBraceletQueue(braceletQueue);
+
         cout << endl;
     }
 
