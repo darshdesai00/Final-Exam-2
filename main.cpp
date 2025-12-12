@@ -4,6 +4,7 @@
 #include <ctime>
 #include <deque>
 #include <vector>
+#include <stack>
 using namespace std;
 
 
@@ -62,7 +63,15 @@ void printBraceletQueue(const vector<string>& v) {
     cout << endl;
 }
 
-
+// Sticker Booth (stack)
+void printStickerStack(stack<string> s) {
+    cout << "Sticker Booth Queue: ";
+    while (!s.empty()) {
+        cout << "[" << s.top() << "] ";
+        s.pop();
+    }
+    cout << endl;
+}
 
 int main() {
     srand(time(0));
@@ -71,23 +80,30 @@ int main() {
     string drinks[] = {"Latte", "Mocha", "Matcha", "Cold Brew", "Cappuccino"};
     string muffins[] = {"Blueberry Muffin", "Chocolate Muffin", "Banana Muffin", "Lemon Poppy Seed Muffin"};
     string bracelets[] = {"Beaded Bracelet", "Charm Bracelet", "Friendship Tie", "Woven Bracelet"};
+    string stickers[] = {"Star Sticker", "Smile Sticker", "Sparkle Sticker", "Lightning Sticker"};
 
     // Initial Coffee Queue with (3 random customers)
     for (int i = 0; i < 3; i++) {
         enqueue(names[rand() % 5], drinks[rand() % 5]);
     }
     
-    // Initial Muffin Queue with (3 random customers)
+    // Initial Muffin Queue (Deque)
     deque<string> muffinQueue;
     for (int i = 0; i < 3; i++) {
         muffinQueue.push_back(names[rand() % 5] + string(" --> ") + muffins[rand() % 4]);
     }
 
-    // Initial Bracelet Queue
+    // Initial Bracelet Booth (Vector)
     vector<string>braceletQueue;
     for(int i = 0; i < 3; i++)
     braceletQueue.push_back(names[rand() % 5] + " --> " + bracelets[rand() % 4]);
     
+    // Initial Sticker Booth (stack
+    stack<string> stickerStack;
+    for (int i = 0; i < 3; i++) {
+        stickerStack.push(names[rand() % 5] + string(" --> ") + stickers[rand() % 4]);
+    }
+
     cout << "Beginning Multi-Booth Simulation (10 Rounds)\n\n";     
 
     // 10 round simulation
