@@ -31,22 +31,35 @@ if (head == NULL) {
     }
 }
 
-// Queue
-void printQueue() {
+// Coffee Queue
+void printCoffeeQueue() {
     Node * temp = head;
     cout << "Coffee Booth Queue: ";
     while (temp != NULL) {
         cout << "[" << temp->name << " --> " << temp->order << "] ";
         temp = temp->next;
+    }    
+}
+
+// Muffin Queue
+void printMuffinQueue(const deque<string>& dq) {
+    cout << "Mufffin Booth Queue: ";
+    while (temp != NULL) {
+    for (int i = 0; i < dq.size(); i++) {
+        cout << "[" << dq[i] << "] "; 
     }
     cout << endl;
 }
+
+
+
 
 int main() {
     srand(time(0));
 
     string names[] = {"Alex", "Jordan", "Riley", "Taylor", "Casey"};
     string drinks[] = {"Latte", "Mocha", "Matcha", "Cold Brew", "Cappuccino"};
+    string muffins[] = {"Blueberry Muffin", "Chocolate Muffin", "Banana Muffin", "Lemon Poppy Seed Muffin"};
 
     // Queue with 3 random customers
     for (int i = 0; i < 3; i++) {
@@ -56,11 +69,12 @@ int main() {
     }
         cout << "Begining the Coffee Booth Simulation (10 Rounds)\n\n";
         
-        // Loop
+        // 10 round sim
         for(int round = 1; round <= 10; round++) {
             cout << "---- Round " << round << " ----\n";
         
-            // Served customer at the head spot
+// *** COFFEE BOOTH ***
+        // Served customer at the head spot
         if (head != NULL) {
             cout << "Served: " << head->name << " --> " << head->order << endl;
 
@@ -80,8 +94,15 @@ int main() {
             string customerName = names[rand() % 5];
             string customerOrder = drinks[rand() % 5];
             enqueue(customerName , customerOrder);
-            cout << "New arrival: " << customerName << " --> " << customerOrder << endl;
+            cout << "Cofffe new arrival: " << customerName << " --> " << customerOrder << endl;
         }
+
+// *** MUFFIN BOOTH ***
+        if (!muffinQueue.empty()) {
+
+        }
+
+
 
         printQueue();
         cout << endl;
