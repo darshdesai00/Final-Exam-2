@@ -7,8 +7,6 @@
 #include <stack>
 using namespace std;
 
-
-
 // Milestone 1 :
 // Node Struct
 struct Node {
@@ -164,10 +162,25 @@ int main() {
             cout << "Bracelet new arrival: " << n << " --> " << b << endl;
         }
         
+// *** STICKER BOOTH ***
+        if (!stickerStack.empty()) {
+            cout << "Sticker Served: " << stickerStack.top() << endl;
+            stickerStack.pop();
+        } else {
+            cout << "No customers at Sticker Booth.\n";
+        }
+
+        if (rand() % 2 == 0) {
+            string sn = names[rand() % 5];
+            string so = stickers[rand() % 4];
+            stickerStack.push(sn + string(" --> ") + so);
+            cout << "Sticker new arrival: " << sn << " --> " << so << endl;
+        }
+       
         printCoffeeQueue();
         printMuffinQueue(muffinQueue);
         printBraceletQueue(braceletQueue);
-
+        printStickerStack(stickerStack);
         cout << endl;
     }
 
